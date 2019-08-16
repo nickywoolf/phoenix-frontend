@@ -42,12 +42,12 @@ defmodule Mix.Tasks.PhxFrontend do
     end
   end
 
-  defp get_confirmation(frontend) do
-    Mix.shell().yes?("Replace assets directory with frontend '#{frontend}'.")
-  end
-
   defp unavailable(frontend) do
     !Enum.member?(@frontends, frontend) or !File.exists?(frontend_path(frontend))
+  end
+
+  defp get_confirmation(frontend) do
+    Mix.shell().yes?("Replace assets directory with frontend '#{frontend}'.")
   end
 
   defp remove_current_assets_directory() do
