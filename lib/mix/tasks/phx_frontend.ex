@@ -6,6 +6,19 @@ defmodule Mix.Tasks.PhxFrontend do
   @frontends ["tailwind-vue"]
 
   @moduledoc """
+  Installs frontend assets into Phoenix project
+
+  This task will remove the current assets directory before
+  copying over the selected frontend asset files.
+
+  ## Usage
+
+      mix phx_frontend <frontend>
+
+  ## Available frontends
+
+      * tailwind-vue
+
   """
 
   def run([frontend]) do
@@ -38,21 +51,17 @@ defmodule Mix.Tasks.PhxFrontend do
   end
 
   defp remove_current_assets_directory() do
-    Mix.shell().info("Removing current assets directory...")
     File.rm_rf!(Path.expand("./assets"))
-    Mix.shell().info("Done")
   end
 
   defp copy_frontend_assets(frontend) do
-    Mix.shell().info("Copying frontend directory...")
     File.cp_r!(frontend_path(frontend), Path.expand("./assets"))
-    Mix.shell().info("Done")
   end
 
   defp run_npm_install() do
-    Mix.shell().info("Installing npm packages...")
+    Mix.shell().info([:green, "installing npm packages..."])
+
     System.cmd("npm", ["install"], cd: "assets")
-    Mix.shell().info("Done")
   end
 
   defp frontend_path(frontend) do
