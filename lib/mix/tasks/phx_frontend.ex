@@ -10,9 +10,12 @@ defmodule Mix.Tasks.PhxFrontend do
 
   def run([frontend]) do
     ensure_frontend_available(frontend)
-    remove_current_assets_directory()
-    copy_frontend_assets(frontend)
-    run_npm_install()
+
+    if get_confirmation(frontend) do
+      remove_current_assets_directory()
+      copy_frontend_assets(frontend)
+      run_npm_install()
+    end
   end
 
   defp ensure_frontend_available(frontend) do
@@ -24,6 +27,10 @@ defmodule Mix.Tasks.PhxFrontend do
         - #{Enum.join(@frontends, "\n  - ")}
       """)
     end
+  end
+
+  defp get_confirmation(frontend) do
+    Mix.shell().yes?("Replace assets directory with frontend '#{frontend}'.")
   end
 
   defp unavailable(frontend) do
