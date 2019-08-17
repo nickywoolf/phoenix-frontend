@@ -13,7 +13,7 @@ defmodule Mix.Tasks.PhxFrontend do
 
   ## Usage
 
-      mix phx_frontend <frontend>
+      $ mix phx_frontend <frontend>
 
   ## Available frontends
 
