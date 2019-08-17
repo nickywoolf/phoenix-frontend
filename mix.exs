@@ -5,16 +5,14 @@ defmodule PhoenixFrontend.MixProject do
     [
       app: :phoenix_frontend,
       version: "0.1.0",
-      elixir: "~> 1.0",
+      elixir: "~> 1.7",
       start_permanent: Mix.env() == :prod,
       deps: deps(),
-      name: "",
+      name: "PhoenixFrontend",
       source_url: "https://github.com/nickywoolf/phoenix-frontend",
       package: package(),
-      description: """
-      Replaces Phoenix framework assets directory with
-      preconfigured frontend frameworks.
-      """
+      description: description(),
+      docs: docs()
     ]
   end
 
@@ -28,8 +26,19 @@ defmodule PhoenixFrontend.MixProject do
   # Run "mix help deps" to learn about dependencies.
   defp deps do
     [
-      {:ex_doc, "~> 0.20"}
+      {:ex_doc, "~> 0.21"}
     ]
+  end
+
+  defp description() do
+    """
+    Replaces Phoenix framework assets directory with
+    preconfigured frontend frameworks.
+    """
+  end
+
+  defp docs() do
+    [main: "Mix.Tasks.PhxFrontend"]
   end
 
   defp package() do
